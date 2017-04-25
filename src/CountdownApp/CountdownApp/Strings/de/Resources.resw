@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CountdownDateTimeFormatString" xml:space="preserve">
+    <value>dddd, d. MMMM yyyy, HH:mm 'Uhr'</value>
+  </data>
+  <data name="CountdownDaysOneFormatString" xml:space="preserve">
+    <value>{0} Tag</value>
+  </data>
+  <data name="CountdownDaysMultipleFormatString" xml:space="preserve">
+    <value>{0} Tage</value>
+  </data>
+  <data name="CountdownDaysZeroString" xml:space="preserve">
+    <value>Heute</value>
+  </data>
+  <data name="CountdownNotificationTextFormatString" xml:space="preserve">
+    <value>Es ist soweit! Der Countdown für {0} ist abgelaufen.</value>
+  </data>
+  <data name="CountdownNotificationShowActionString" xml:space="preserve">
+    <value>Countdown anzeigen</value>
+  </data>
+  <data name="EditCancelAppBarButton.Label" xml:space="preserve">
+    <value>Verwerfen</value>
+  </data>
+  <data name="EditDateDatePicker.Header" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="EditImageRemoveButton.Content" xml:space="preserve">
+    <value>Bild entfernen</value>
+  </data>
+  <data name="EditImageSelectButton.Content" xml:space="preserve">
+    <value>Bild auswählen</value>
+  </data>
+  <data name="EditNameTextBox.Header" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="EditNotificationCheckBox.Content" xml:space="preserve">
+    <value>Benachrichtigung bei Ablauf anzeigen</value>
+  </data>
+  <data name="EditOptionsTextBlock.Text" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="EditPinCheckBox.Content" xml:space="preserve">
+    <value>An Start anheften</value>
+  </data>
+  <data name="EditSaveAppBarButton.Label" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="EditTimeTimePicker.Header" xml:space="preserve">
+    <value>Uhrzeit</value>
+  </data>
+  <data name="MainAddAppBarButton.Label" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="MainDeleteAppBarButton.Label" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="MainDeleteMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="MainEditAppBarButton.Label" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="MainEditMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="MainHeaderTextBlock.Text" xml:space="preserve">
+    <value>Meine Countdowns</value>
+  </data>
+  <data name="MainPinAppBarButton.Label" xml:space="preserve">
+    <value>Anheften</value>
+  </data>
+  <data name="MainPinMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Anheften</value>
+  </data>
+  <data name="MainSettingsAppBarButton.Label" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="MainUnpinAppBarButton.Label" xml:space="preserve">
+    <value>Lösen</value>
+  </data>
+  <data name="MainUnpinMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Lösen</value>
+  </data>
+  <data name="ViewDeleteAppBarButton.Label" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="ViewEditAppBarButton.Label" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="ViewPinAppBarButton.Label" xml:space="preserve">
+    <value>Anheften</value>
+  </data>
+  <data name="ViewTimeDaysTextBlock.Text" xml:space="preserve">
+    <value>Tage</value>
+  </data>
+  <data name="ViewTimeHoursTextBlock.Text" xml:space="preserve">
+    <value>Stunden</value>
+  </data>
+  <data name="ViewTimeMinutesTextBlock.Text" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="ViewTimeMonthsTextBlock.Text" xml:space="preserve">
+    <value>Monate</value>
+  </data>
+  <data name="ViewTimeSecondsTextBlock.Text" xml:space="preserve">
+    <value>Sekunden</value>
+  </data>
+  <data name="ViewTimeWeeksTextBlock.Text" xml:space="preserve">
+    <value>Wochen</value>
+  </data>
+  <data name="ViewTimeYearsTextBlock.Text" xml:space="preserve">
+    <value>Jahre</value>
+  </data>
+  <data name="ViewUnpinAppBarButton.Label" xml:space="preserve">
+    <value>Lösen</value>
+  </data>
+  <data name="CropCancelAppBarButton.Label" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CropDoneAppBarButton.Label" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="SettingsReviewButton.Content" xml:space="preserve">
+    <value>Im Store bewerten</value>
+  </data>
+  <data name="SettingsDesignDarkRadioButton.Content" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="SettingsDesignLightRadioButton.Content" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="SettingsDesignSystemRadioButton.Content" xml:space="preserve">
+    <value>Systemeinstellung verwenden</value>
+  </data>
+  <data name="SettingsDesignTextBlock.Text" xml:space="preserve">
+    <value>Design</value>
+  </data>
+  <data name="SettingsHeaderTextBlock.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="SettingsAboutTextBlock.Text" xml:space="preserve">
+    <value>Info zu dieser App</value>
+  </data>
+  <data name="SettingsFeedbackButton.Content" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="SettingsChangelogButton.Content" xml:space="preserve">
+    <value>Neuerungen</value>
+  </data>
+  <data name="SettingsChangelogContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="SettingsChangelogContentDialog.Title" xml:space="preserve">
+    <value>Neuerungen</value>
+  </data>
+  <data name="SettingsDonateButton.Content" xml:space="preserve">
+    <value>Spenden</value>
+  </data>
+  <data name="SettingsDonateContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="SettingsDonateContentDialog.Title" xml:space="preserve">
+    <value>Für Countdown+ spenden</value>
+  </data>
+  <data name="SettingsDonateDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Wenn dir die App gefällt, kannst du mich gerne mit einer kleinen Spende unterstützen.</value>
+  </data>
+  <data name="SettingsDonateOneButton.Content" xml:space="preserve">
+    <value>0,99 Euro spenden</value>
+  </data>
+  <data name="SettingsDonateThreeButton.Content" xml:space="preserve">
+    <value>4,99 Euro spenden</value>
+  </data>
+  <data name="SettingsDonateTwoButton.Content" xml:space="preserve">
+    <value>2,99 Euro spenden</value>
+  </data>
+  <data name="EditRecurrentCheckBox.Content" xml:space="preserve">
+    <value>Jährliche Wiederholung</value>
+  </data>
+  <data name="MainEmptyTextBlock.Text" xml:space="preserve">
+    <value>Keine Countdowns vorhanden. Füge jetzt einen Countdown hinzu, um ihn hier anzuzeigen.</value>
+  </data>
+  <data name="ViewSettingsAppBarButton.Label" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="CountdownNotificationDismissActionString" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+</root>

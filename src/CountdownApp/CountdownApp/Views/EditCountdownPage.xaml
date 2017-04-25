@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="CountdownApp.EditCountdownPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountdownApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="HeaderTemplate">
+            <TextBlock Text="{Binding}" FontWeight="SemiBold" />
+        </DataTemplate>
+    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="EditSaveAppBarButton" Icon="Save" Command="{Binding SaveCommand}" />
+            <AppBarButton x:Uid="EditCancelAppBarButton" Icon="Cancel" Command="{Binding CancelCommand}" />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <StackPanel Padding="10">
+                <local:CountdownImage Margin="0,0,0,15" Width="220" Height="220" ImageSource="{Binding ImageData, Mode=OneWay}" />
+                <StackPanel Margin="0,0,0,15" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Uid="EditImageSelectButton" Margin="5,0" Command="{Binding SelectImageCommand}" />
+                    <Button x:Uid="EditImageRemoveButton" Margin="5,0" Command="{Binding RemoveImageCommand}" Visibility="{Binding ImageSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+
+                <TextBox x:Uid="EditNameTextBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HeaderTemplate="{StaticResource HeaderTemplate}" Margin="0,5,0,0" />
+                <DatePicker x:Uid="EditDateDatePicker" Date="{Binding Date, Mode=TwoWay}" HeaderTemplate="{StaticResource HeaderTemplate}" Margin="0,5,0,0" />
+                <TimePicker x:Uid="EditTimeTimePicker" Time="{Binding Time, Mode=TwoWay}" HeaderTemplate="{StaticResource HeaderTemplate}" Margin="0,5,0,0" />
+                <CheckBox x:Uid="EditRecurrentCheckBox" IsChecked="{Binding IsRecurrent, Mode=TwoWay}" Margin="0,5" />
+
+                <TextBlock x:Uid="EditOptionsTextBlock" FontWeight="SemiBold" />
+                <CheckBox x:Uid="EditPinCheckBox" IsChecked="{Binding PinnedToStart, Mode=TwoWay}" />
+                <CheckBox x:Uid="EditNotificationCheckBox" IsChecked="{Binding FinishedNotification, Mode=TwoWay}" Visibility="{Binding Expired, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

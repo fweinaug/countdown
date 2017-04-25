@@ -1,0 +1,23 @@
+﻿<Application
+    x:Class="CountdownApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountdownApp">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Countdown.xaml" />
+                <ResourceDictionary Source="Styles/MenuFlyout.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="SystemAccentColor">#0085E5</Color>
+
+            <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <local:CountdownDateConverter x:Key="CountdownDateConverter" />
+            <local:CountdownDaysConverter x:Key="CountdownDaysConverter" />
+
+            <local:Settings x:Key="Settings" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

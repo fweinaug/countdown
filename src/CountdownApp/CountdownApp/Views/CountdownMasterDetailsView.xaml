@@ -1,0 +1,213 @@
+﻿<UserControl
+    x:Class="CountdownApp.CountdownMasterDetailsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountdownApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="400" Name="root"
+    Loaded="OnLoaded" Unloaded="OnUnloaded">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="SelectionStates" CurrentStateChanged="SelectionStatesCurrentStateChanged">
+                <VisualState x:Name="FocusedState" />
+
+                <VisualState x:Name="SelectedState">
+                    <VisualState.Setters>
+                        <Setter Target="DetailContentGrid.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="SelectedNarrowState">
+                    <VisualState.Setters>
+                        <Setter Target="DetailContentGrid.Visibility" Value="Visible" />
+                        <Setter Target="MasterGrid.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="UnselectedState" />
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="AdaptiveStates" CurrentStateChanged="AdaptiveStatesCurrentStateChanged">
+                <VisualState x:Name="DefaultState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="MasterListView.SelectionMode" Value="Single" />
+                        <Setter Target="CountdownCommandBar.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="MasterColumn.Width" Value="*" />
+                        <Setter Target="DetailColumn.Width" Value="0" />
+                        <Setter Target="DetailGrid.(Grid.Column)" Value="0" />
+                        <Setter Target="DetailGrid.BorderThickness" Value="0" />
+                        <Setter Target="MasterCommandBar.(Grid.Row)" Value="3" />
+                        <Setter Target="MasterListView.SelectionMode" Value="None" />
+                        <Setter Target="CountdownNarrowCommandBar.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MasterColumn" Width="320" />
+            <ColumnDefinition x:Name="DetailColumn" Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="MasterGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Uid="MainHeaderTextBlock"
+                       Grid.Row="0"
+                       Margin="12,8"
+                       Style="{ThemeResource TitleTextBlockStyle}" />
+
+            <ListView x:Name="MasterListView"
+                      Grid.Row="1"
+                      ItemsSource="{Binding Countdowns}"
+                      ItemContainerTransitions="{x:Null}"
+                      IsItemClickEnabled="True"
+                      ItemClick="MasterListViewItemClick"
+                      SelectionChanged="MasterListViewSelectionChanged"
+                      RightTapped="MasterListViewRightTapped">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:CountdownViewModel">
+                        <Grid Margin="0,11,0,13">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <local:CountdownImage Grid.Column="0"
+                                                  ImageSource="{x:Bind ImageData, Mode=OneWay}"
+                                                  Width="50" Height="50"
+                                                  Margin="0,0,10,0" />
+                            
+                            <TextBlock Grid.Column="1"
+                                       Text="{x:Bind Name, Mode=OneWay}"
+                                       MaxLines="2" TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Center"
+                                       Style="{ThemeResource BaseTextBlockStyle}" />
+
+                            <TextBlock Grid.Column="2"
+                                       Text="{x:Bind DaysRemaining, Mode=OneWay, Converter={StaticResource CountdownDaysConverter}}"
+                                       MaxLines="1"
+                                       VerticalAlignment="Center"
+                                       Foreground="Gray"
+                                       Style="{ThemeResource BodyTextBlockStyle}"
+                                       Margin="10,0,0,0" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout Closing="MenuFlyoutClosing">
+                        <MenuFlyoutItem x:Uid="MainPinMenuFlyoutItem" Tag="&#xE141;" Style="{StaticResource MenuFlyoutItemIconTemplate}" Command="{Binding PinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}" />
+                        <MenuFlyoutItem x:Uid="MainUnpinMenuFlyoutItem" Tag="&#xE77A;" Style="{StaticResource MenuFlyoutItemIconTemplate}" Command="{Binding UnpinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <MenuFlyoutSeparator />
+                        <MenuFlyoutItem x:Uid="MainEditMenuFlyoutItem" Tag="&#xE70F;" Style="{StaticResource MenuFlyoutItemIconTemplate}" Command="{Binding EditCountdownCommand}" />
+                        <MenuFlyoutItem x:Uid="MainDeleteMenuFlyoutItem" Tag="&#xE74D;" Style="{StaticResource MenuFlyoutItemIconTemplate}" Command="{Binding DeleteCountdownCommand}" />
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+            </ListView>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20"
+                        Visibility="{Binding CountdownsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Ellipse Fill="{ThemeResource CountdownImageBrush}" Width="80" Height="80" />
+                <TextBlock x:Uid="MainEmptyTextBlock"
+                           TextWrapping="WrapWholeWords" TextAlignment="Center"
+                           FontWeight="Thin"
+                           Foreground="Gray"
+                           Margin="0,5,0,0" />
+            </StackPanel>
+
+            <CommandBar Name="MasterCommandBar" Grid.Row="2">
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton x:Uid="MainSettingsAppBarButton" Command="{Binding ShowSettingsCommand}" />
+                </CommandBar.SecondaryCommands>
+
+                <AppBarButton x:Uid="MainAddAppBarButton" Icon="Add" Command="{Binding CreateCountdownCommand}" />
+            </CommandBar>
+        </Grid>
+
+        <Grid x:Name="DetailGrid"
+              Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+              BorderThickness="1,0,0,0"
+              BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}">
+
+            <Grid Name="DetailContentGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentControl Grid.Row="1"
+                                HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                Content="{Binding SelectedCountdown, ElementName=root}"
+                                ManipulationMode="TranslateX,TranslateY,System"
+                                ManipulationStarted="ContentControlManipulationStarted" ManipulationCompleted="ContentControlManipulationCompleted">
+
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <local:CountdownView />
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+
+                    <ContentControl.ContentTransitions>
+                        <TransitionCollection>
+                            <ContentThemeTransition />
+                        </TransitionCollection>
+                    </ContentControl.ContentTransitions>
+                </ContentControl>
+
+                <CommandBar Name="CountdownCommandBar" Grid.Row="0" x:DeferLoadStrategy="Lazy" Visibility="Collapsed"
+                            DefaultLabelPosition="Right" OverflowButtonVisibility="Collapsed" Background="Transparent">
+                    <AppBarButton x:Uid="MainPinAppBarButton" Icon="Pin" Command="{Binding PinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}" />
+                    <AppBarButton x:Uid="MainUnpinAppBarButton" Icon="UnPin" Command="{Binding UnpinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <AppBarButton x:Uid="MainEditAppBarButton" Icon="Edit" Command="{Binding EditCountdownCommand}" />
+                    <AppBarButton x:Uid="MainDeleteAppBarButton" Icon="Delete" Command="{Binding DeleteCountdownCommand}" />
+                </CommandBar>
+
+                <CommandBar Name="CountdownNarrowCommandBar" Grid.Row="2" x:DeferLoadStrategy="Lazy" Visibility="Collapsed">
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton x:Uid="ViewEditAppBarButton" Command="{Binding EditCountdownCommand}" />
+                        <AppBarButton x:Uid="ViewDeleteAppBarButton" Command="{Binding DeleteCountdownCommand}" />
+                        <AppBarButton x:Uid="ViewSettingsAppBarButton" Command="{Binding ShowSettingsCommand}" />
+                    </CommandBar.SecondaryCommands>
+
+                    <AppBarButton x:Uid="MainPinAppBarButton" Icon="Pin" Command="{Binding PinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=True}" />
+                    <AppBarButton x:Uid="MainUnpinAppBarButton" Icon="UnPin" Command="{Binding UnpinCountdownCommand}" Visibility="{Binding SelectedCountdown.PinnedToStart, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </CommandBar>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

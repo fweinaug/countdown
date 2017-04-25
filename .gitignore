@@ -1,0 +1,15 @@
+﻿#Ignore thumbnails created by Windows
+Thumbs.db
+ 
+#Ignore files created by Visual Studio
+*.user
+*.suo
+*.pfx
+*.appx
+project.lock.json
+.vs/
+[Oo]bj/
+[Bb]in/
+[Bb]ld/
+[Aa]pp[Pp]ackages/
+[Bb]undle[Aa]rtifacts/

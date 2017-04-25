@@ -1,0 +1,114 @@
+﻿<UserControl
+    x:Class="CountdownApp.CountdownView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountdownApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="ToggledState">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding TimeToggled}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ToggleTimeButtonIcon.Glyph" Value="&#xE81C;" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="ExpiredState">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{Binding Expired}" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="ToggleTimeButton.Visibility" Value="Collapsed" />
+                        <Setter Target="ProgressBar.Style" Value="{StaticResource CountdownExpiredProgressStyle}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <local:CountdownImage ImageSource="{Binding ImageData, Mode=OneWay}" Width="220" Height="220" Margin="10" />
+
+                <TextBlock Style="{StaticResource CountdownNameStyle}"
+                           HorizontalAlignment="Center"
+                           Text="{Binding Name, Mode=OneWay}" MaxLines="2" TextTrimming="CharacterEllipsis"
+                           Margin="8,0" />
+
+                <TextBlock Style="{StaticResource CountdownDaysStyle}"
+                           HorizontalAlignment="Center"
+                           Text="{Binding DaysRemaining, Mode=OneWay, Converter={StaticResource CountdownDaysConverter}}" />
+
+                <ProgressBar Name="ProgressBar"
+                             Style="{StaticResource CountdownProgressStyle}"
+                             Margin="0,25,0,0"
+                             Minimum="0" Maximum="1"
+                             Value="{Binding ProgressPercentage, Mode=OneWay}" />
+            </StackPanel>
+
+            <Grid Grid.Row="1" Style="{StaticResource CountdownDetailsStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource CountdownDetailsDateStyle}"
+                               HorizontalAlignment="Center" TextAlignment="Center"
+                               Text="{Binding Date, Mode=OneWay, Converter={StaticResource CountdownDateConverter}}" />
+
+                    <Grid HorizontalAlignment="Center" Margin="0,30,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Time.Years, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" />
+                        <TextBlock Grid.Column="0" Grid.Row="1" x:Uid="ViewTimeYearsTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Time.Months, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" />
+                        <TextBlock Grid.Column="1" Grid.Row="1" x:Uid="ViewTimeMonthsTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Time.Weeks, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" />
+                        <TextBlock Grid.Column="2" Grid.Row="1" x:Uid="ViewTimeWeeksTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Time.Days, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" />
+                        <TextBlock Grid.Column="3" Grid.Row="1" x:Uid="ViewTimeDaysTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Time.Hours, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" Margin="0,20,0,0" />
+                        <TextBlock Grid.Column="1" Grid.Row="3" x:Uid="ViewTimeHoursTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding Time.Minutes, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" Margin="0,20,0,0" />
+                        <TextBlock Grid.Column="2" Grid.Row="3" x:Uid="ViewTimeMinutesTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Time.Seconds, Mode=TwoWay}" Style="{StaticResource CountdownDetailsNumberStyle}" Margin="0,20,0,0" />
+                        <TextBlock Grid.Column="3" Grid.Row="3" x:Uid="ViewTimeSecondsTextBlock" Style="{StaticResource CountdownDetailsCaptionStyle}" />
+
+                        <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Name="ToggleTimeButton" Command="{Binding ToggleTimeCommand}" Style="{StaticResource CountdownToggleTimeButtonStyle}" Margin="0,25,0,0">
+                            <FontIcon Name="ToggleTimeButtonIcon" Glyph="&#xECC5;" />
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

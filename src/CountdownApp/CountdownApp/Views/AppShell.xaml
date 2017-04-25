@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="CountdownApp.AppShell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountdownApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="OnLoaded" Unloaded="OnUnloaded"
+    RequestedTheme="{Binding Source={StaticResource Settings}, Path=AppTheme, Mode=TwoWay}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Frame x:Name="Frame" Navigated="FrameNavigated" />
+        <ProgressRing Width="50" Height="50" IsActive="{Binding IsBusy}"
+                      Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Grid>
+</Page>

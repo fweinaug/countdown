@@ -1,0 +1,87 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <ImageBrush x:Key="CountdownImageBrush">
+                <ImageBrush.ImageSource>
+                    <BitmapImage CreateOptions="None" UriSource="../Assets/CountdownLight.png" />
+                </ImageBrush.ImageSource>
+            </ImageBrush>
+
+            <SolidColorBrush x:Key="CountdownProgressBackgroundBrush">#E6E6E6</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownExpiredProgressForegroundBrush">#BEBEBE</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsBackgroundBrush">#F5F5F5</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsDateForegroundBrush">#343434</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsNumberForegroundBrush">#343434</SolidColorBrush>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+            <ImageBrush x:Key="CountdownImageBrush">
+                <ImageBrush.ImageSource>
+                    <BitmapImage CreateOptions="None" UriSource="../Assets/CountdownDark.png" />
+                </ImageBrush.ImageSource>
+            </ImageBrush>
+
+            <SolidColorBrush x:Key="CountdownProgressBackgroundBrush">#1F1F1F</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownExpiredProgressForegroundBrush">#343434</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsBackgroundBrush">#111111</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsDateForegroundBrush">#FDFDFD</SolidColorBrush>
+            <SolidColorBrush x:Key="CountdownDetailsNumberForegroundBrush">#FDFDFD</SolidColorBrush>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <SolidColorBrush x:Key="CountdownProgressForegroundBrush" Color="{StaticResource SystemAccentColor}" />
+    <SolidColorBrush x:Key="CountdownDetailsCaptionForegroundBrush">DimGray</SolidColorBrush>
+    <SolidColorBrush x:Key="CountdownToggleTimeButtonForegroundBrush">DimGray</SolidColorBrush>
+
+    <Style x:Key="CountdownImageShapeStyle" TargetType="Shape">
+        <Setter Property="Fill" Value="{ThemeResource CountdownImageBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownNameStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}" />
+
+    <Style x:Key="CountdownDaysStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}" />
+
+    <Style x:Key="CountdownProgressStyle" TargetType="ProgressBar">
+        <Setter Property="Foreground" Value="{ThemeResource CountdownProgressForegroundBrush}" />
+        <Setter Property="Background" Value="{ThemeResource CountdownProgressBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownExpiredProgressStyle" TargetType="ProgressBar" BasedOn="{StaticResource CountdownProgressStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource CountdownExpiredProgressForegroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownDetailsStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{ThemeResource CountdownDetailsBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownDetailsDateStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource CountdownDetailsDateForegroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownDetailsNumberStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="27" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{ThemeResource CountdownDetailsNumberForegroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownDetailsCaptionStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontStretch" Value="Condensed" />
+        <Setter Property="FontWeight" Value="Thin" />
+        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{ThemeResource CountdownDetailsCaptionForegroundBrush}" />
+    </Style>
+
+    <Style x:Key="CountdownToggleTimeButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{ThemeResource CountdownToggleTimeButtonForegroundBrush}" />
+    </Style>
+</ResourceDictionary>
