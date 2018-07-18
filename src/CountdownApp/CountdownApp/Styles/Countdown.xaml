@@ -44,6 +44,11 @@
 
     <Style x:Key="CountdownDaysStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}" />
 
+    <Style x:Key="CountdownRepetitionsStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Foreground" Value="Gray" />
+    </Style>
+
     <Style x:Key="CountdownProgressStyle" TargetType="ProgressBar">
         <Setter Property="Foreground" Value="{ThemeResource CountdownProgressForegroundBrush}" />
         <Setter Property="Background" Value="{ThemeResource CountdownProgressBackgroundBrush}" />

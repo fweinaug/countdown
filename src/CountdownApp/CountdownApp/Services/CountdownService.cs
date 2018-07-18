@@ -13,8 +13,6 @@ namespace CountdownApp
       {
         var countdowns = database.Countdowns.ToList();
 
-        database.SaveChanges();
-
         return countdowns;
       }
     }

@@ -144,7 +144,7 @@ namespace CountdownApp
 
         for (var plan = start; plan <= end; plan = plan.AddDays(1))
         {
-          var daysRemaining = countdown.GetDaysRemaining(now);
+          var daysRemaining = countdown.GetDaysRemaining(plan);
 
           var content = CreateTileContent(name, imageUri, daysRemaining);
           var notification = new ScheduledTileNotification(content, plan);

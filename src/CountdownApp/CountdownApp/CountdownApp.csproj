@@ -164,6 +164,7 @@
       <DependentUpon>ImageCropper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SelectedRegion.cs" />
+    <Compile Include="Views\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Views\CountdownMasterDetailsView.xaml.cs">
       <DependentUpon>CountdownMasterDetailsView.xaml</DependentUpon>
     </Compile>

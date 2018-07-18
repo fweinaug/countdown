@@ -42,16 +42,25 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <local:CountdownImage ImageSource="{Binding ImageData, Mode=OneWay}" Width="220" Height="220" Margin="10" />
+                <local:CountdownImage ImageSource="{Binding ImageData, Mode=OneWay}"
+                                      Width="220" Height="220"
+                                      Margin="10" />
 
                 <TextBlock Style="{StaticResource CountdownNameStyle}"
                            HorizontalAlignment="Center"
                            Text="{Binding Name, Mode=OneWay}" MaxLines="2" TextTrimming="CharacterEllipsis"
                            Margin="8,0" />
 
-                <TextBlock Style="{StaticResource CountdownDaysStyle}"
-                           HorizontalAlignment="Center"
-                           Text="{Binding DaysRemaining, Mode=OneWay, Converter={StaticResource CountdownDaysConverter}}" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource CountdownDaysStyle}"
+                               Text="{Binding DaysRemaining, Mode=OneWay, Converter={StaticResource CountdownDaysConverter}}" />
+
+                    <TextBlock Style="{StaticResource CountdownRepetitionsStyle}"
+                               Margin="5,0,0,0"
+                               Visibility="{Binding RepetitionCount, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}">
+                        (<Run Text="{Binding RepetitionCount, Mode=OneWay}" />)
+                    </TextBlock>
+                </StackPanel>
 
                 <ProgressBar Name="ProgressBar"
                              Style="{StaticResource CountdownProgressStyle}"

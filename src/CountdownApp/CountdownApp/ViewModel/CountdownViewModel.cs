@@ -20,6 +20,7 @@ namespace CountdownApp
     private int daysTotal;
     private double progressPercentage;
     private DateTime expirationDate;
+    private int? repetitionCount;
     private bool expired;
 
     private bool timeToggled = false;
@@ -108,6 +109,12 @@ namespace CountdownApp
       private set { SetProperty(ref expirationDate, value); }
     }
 
+    public int? RepetitionCount
+    {
+      get { return repetitionCount; }
+      private set { SetProperty(ref repetitionCount, value); }
+    }
+
     public bool Expired
     {
       get { return expired; }
@@ -170,6 +177,7 @@ namespace CountdownApp
       }
 
       ExpirationDate = schedule.NextCycle;
+      RepetitionCount = schedule.NumberOfCycles;
       Expired = schedule.Expired;
       DaysRemaining = progress.DaysRemaining;
       DaysTotal = progress.DaysTotal;

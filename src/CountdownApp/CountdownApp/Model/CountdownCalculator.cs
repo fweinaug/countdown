@@ -11,6 +11,8 @@ namespace CountdownApp
       var previous = started;
       var expired = false;
 
+      int? cycles = null;
+
       if (started >= now)
       {
         started = countdown.Created;
@@ -30,6 +32,7 @@ namespace CountdownApp
         finished = date;
         if (addedYears > 1)
           previous = date.AddYears(-1);
+        cycles = addedYears;
       }
       else
       {
@@ -41,6 +44,7 @@ namespace CountdownApp
         Started = started,
         NextCycle = finished,
         PreviousCycle = previous,
+        NumberOfCycles = cycles,
         Expired = expired
       };
     }
@@ -93,7 +97,8 @@ namespace CountdownApp
     private static Time CalculateTime(DateTime start, DateTime end)
     {
       var years = end.Year - start.Year;
-      if (years > 0 && (end.Month < start.Month) || (end.Month == start.Month && end.Day < start.Day))
+      if (years > 0 && (end.Month < start.Month
+        || end.Month == start.Month && (end.Day < start.Day || end.Day == start.Day && end.TimeOfDay < start.TimeOfDay)))
         --years;
 
       if (years > 0)

@@ -14,6 +14,7 @@
             <Color x:Key="SystemAccentColor">#0085E5</Color>
 
             <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <local:CountdownDateConverter x:Key="CountdownDateConverter" />
             <local:CountdownDaysConverter x:Key="CountdownDaysConverter" />
 

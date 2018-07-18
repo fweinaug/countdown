@@ -8,6 +8,7 @@ namespace CountdownApp
 
     public DateTime NextCycle { get; set; }
     public DateTime PreviousCycle { get; set; }
+    public int? NumberOfCycles { get; set; }
 
     public bool Expired { get; set; }
   }

@@ -207,9 +207,9 @@ namespace CountdownApp
         : AppViewBackButtonVisibility.Collapsed;
     }
 
-    private void SelectCountdown(CountdownViewModel countdownViewModel)
+    private void SelectCountdown(CountdownViewModel countdown)
     {
-      MasterListView.SelectedItem = countdownViewModel;
+      MasterListView.SelectedItem = countdown;
     }
   }
 }
