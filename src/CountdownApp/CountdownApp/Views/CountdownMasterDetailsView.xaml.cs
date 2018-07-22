@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.UI.Core;
@@ -44,6 +45,12 @@ namespace CountdownApp
     public CountdownMasterDetailsView()
     {
       InitializeComponent();
+    }
+
+    public void SetTitleBarHeight(double height)
+    {
+      MasterGrid.Padding = new Thickness(0, height, 0, 0);
+      DetailGrid.Padding = new Thickness(0, height, 0, 0);
     }
 
     public void SelectCountdown(string selectedCountdownGuid)

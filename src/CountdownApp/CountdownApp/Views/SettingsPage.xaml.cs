@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,9 +15,12 @@ namespace CountdownApp
       InitializeComponent();
     }
 
-    protected override async void OnNavigatedTo(NavigationEventArgs e)
+    protected override void OnNavigatedTo(NavigationEventArgs e)
     {
       base.OnNavigatedTo(e);
+
+      var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+      coreTitleBar.LayoutMetricsChanged += TitleBarLayoutMetricsChanged;
 
       var package = Package.Current;
       var version = package.Id.Version;
@@ -34,10 +37,20 @@ namespace CountdownApp
         if (radioButton != null)
           radioButton.IsChecked = Equals(radioButton.Tag, theme);
       }
+    }
 
-#if DEBUG
-      await InAppPurchases.ConfigureSimulator();
-#endif
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+      base.OnNavigatedFrom(e);
+
+      var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+      coreTitleBar.LayoutMetricsChanged -= TitleBarLayoutMetricsChanged;
+    }
+
+    private void TitleBarLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+    {
+      if (Content is Grid grid)
+        grid.Padding = new Thickness(0, sender.Height, 0, 0);
     }
 
     private void RadioButtonThemeChecked(object sender, RoutedEventArgs e)
@@ -57,39 +70,6 @@ namespace CountdownApp
     {
       var uri = new Uri("mailto:fweinaug-apps@outlook.com?subject=" + AppNameTextBlock.Text);
       await Launcher.LaunchUriAsync(uri);
-    }
-
-    private async void DonateClick(object sender, RoutedEventArgs e)
-    {
-      var dialog = (ContentDialog)FindName("DonateContentDialog");
-      if (dialog != null)
-        await dialog.ShowAsync();
-    }
-
-    private void DonateOneButtonClick(object sender, RoutedEventArgs e)
-    {
-      Donate(InAppPurchases.Donation1);
-    }
-
-    private void DonateTwoButtonClick(object sender, RoutedEventArgs e)
-    {
-      Donate(InAppPurchases.Donation2);
-    }
-
-    private void DonateThreeButtonClick(object sender, RoutedEventArgs e)
-    {
-      Donate(InAppPurchases.Donation3);
-    }
-
-    private async void Donate(Func<Task<bool>> donateFunc)
-    {
-      var success = await donateFunc();
-      if (success)
-      {
-        Settings.Current.ShowThanks = true;
-
-        DonateContentDialog.Hide();
-      }
     }
 
     private async void ChangelogClick(object sender, RoutedEventArgs e)

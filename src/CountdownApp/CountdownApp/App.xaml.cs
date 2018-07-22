@@ -3,7 +3,6 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Globalization;
-using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
@@ -53,15 +52,6 @@ namespace CountdownApp
 
       applicationView.SetPreferredMinSize(new Size(320, 320));
 
-      var titleBar = applicationView.TitleBar;
-      if (titleBar != null)
-      {
-        var titleBarColor = (Color)Current.Resources["SystemAccentColor"];
-
-        titleBar.BackgroundColor = titleBarColor;
-        titleBar.ButtonBackgroundColor = titleBarColor;
-      }
-
       var shell = Window.Current.Content as AppShell;
 
       if (shell == null)
@@ -72,6 +62,8 @@ namespace CountdownApp
         {
           Language = ApplicationLanguages.Languages[0]
         };
+
+        shell.CustomizeTitleBar(applicationView);
 
         shell.AppFrame.NavigationFailed += OnNavigationFailed;
 
