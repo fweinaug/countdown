@@ -69,6 +69,12 @@ namespace CountdownApp
       if (tile == null)
         return await PinCountdown(countdown);
 
+      if (tile.DisplayName != countdown.Name)
+      {
+        tile.DisplayName = countdown.Name;
+        await tile.UpdateAsync();
+      }
+
       var now = DateTime.Now;
       var updater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(tile.TileId);
 
@@ -156,18 +162,8 @@ namespace CountdownApp
 
     private static XmlDocument CreateTileContent(string name, Uri imageUri, int days)
     {
-      if (Math.Abs(days) >= 1000)
-        days = Math.Sign(days) * 999;
-
-      string number;
-      if (days < 0)
-      {
-        number = "+" + Math.Abs(days);
-      }
-      else
-      {
-        number = days.ToString();
-      }
+      var smallNumber = FormatSmallNumber(days);
+      var number = FormatNumber(days);
 
       string image;
       string branding;
@@ -184,12 +180,12 @@ namespace CountdownApp
 
       string smallTextStyle;
       string mediumTextStyle;
-      if (number.Length <= 2)
+      if (smallNumber.Length <= 2)
       {
         smallTextStyle = "title";
         mediumTextStyle = "header";
       }
-      else if (number.Length == 3)
+      else if (smallNumber.Length == 3)
       {
         smallTextStyle = "subtitle";
         mediumTextStyle = "header";
@@ -205,12 +201,12 @@ namespace CountdownApp
             <visual branding='{branding}' displayName='{name}'>
                 <binding template='TileSmall' hint-textStacking='center'>
                     {image}
-                    <text hint-style='{smallTextStyle}' hint-align='center'>{number}</text>
+                    <text hint-style='{smallTextStyle}' hint-align='center'>{smallNumber}</text>
                 </binding>
 
                 <binding template='TileMedium' hint-textStacking='center'>
                     {image}
-                    <text hint-style='{mediumTextStyle}' hint-align='center'>{number}</text>
+                    <text hint-style='{mediumTextStyle}' hint-align='center'>{smallNumber}</text>
                 </binding>
  
                 <binding template='TileWide' hint-textStacking='center'>
@@ -229,6 +225,32 @@ namespace CountdownApp
       content.LoadXml(xml);
 
       return content;
+    }
+
+    private static string FormatSmallNumber(int days)
+    {
+      var deviceFamily = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
+      if (deviceFamily == "Windows.Mobile")
+      {
+        const int maximum = 999;
+
+        if (Math.Abs(days) > maximum)
+          days = Math.Sign(days) * maximum;
+      }
+
+      return FormatNumber(days);
+    }
+
+    private static string FormatNumber(int days)
+    {
+      if (days < 0)
+      {
+        return "+" + Math.Abs(days);
+      }
+      else
+      {
+        return days.ToString();
+      }
     }
   }
 }
