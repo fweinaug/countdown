@@ -1,15 +1,20 @@
-﻿#Ignore thumbnails created by Windows
+﻿# Ignore thumbnails created by Windows
 Thumbs.db
  
-#Ignore files created by Visual Studio
+# Ignore files created by Visual Studio
 *.user
 *.suo
 *.pfx
 *.appx
+*.nuget.*
 project.lock.json
 .vs/
 [Oo]bj/
 [Bb]in/
 [Bb]ld/
+
+# Windows Store app
 [Aa]pp[Pp]ackages/
 [Bb]undle[Aa]rtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
