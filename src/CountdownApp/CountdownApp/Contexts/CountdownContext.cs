@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace CountdownApp
 {
@@ -8,7 +10,9 @@ namespace CountdownApp
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      optionsBuilder.UseSqlite("Filename=Countdowns.db");
+      var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Countdowns.db");
+
+      optionsBuilder.UseSqlite($"Data Source={dbPath}");
     }
   }
 }

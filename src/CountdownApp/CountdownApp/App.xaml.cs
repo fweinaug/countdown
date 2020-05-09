@@ -1,13 +1,14 @@
 ﻿using System;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Globalization;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.HockeyApp;
 
 namespace CountdownApp
 {
@@ -15,10 +16,9 @@ namespace CountdownApp
   {
     public App()
     {
-      HockeyClient.Current.Configure("3de356bd81244f77b1bac4525df5ef7e");
+      AppCenter.Start("{Your App Secret}", typeof(Analytics), typeof(Crashes));
 
       InitializeComponent();
-      Suspending += OnSuspending;
 
       using (var database = new CountdownContext())
       {
@@ -88,13 +88,6 @@ namespace CountdownApp
     private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
     {
       throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-    }
-
-    private void OnSuspending(object sender, SuspendingEventArgs e)
-    {
-      var deferral = e.SuspendingOperation.GetDeferral();
-      //TODO: Save application state and stop any background activity
-      deferral.Complete();
     }
   }
 }
